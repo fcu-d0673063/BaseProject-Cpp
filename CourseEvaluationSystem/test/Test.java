@@ -14,14 +14,24 @@ public class Test {
         ProjectUI ui = new ProjectUI();
 
         Course c = ui.findCourse("");
+        
         Teacher t = ui.findTeacher("");
+        
         Evaluation[] es = ui.findEvaluation("");
 
         ui.addCourse(new Course(""));
+        
+        ui.addTeacher(new Teacher(""));
+        
         ui.addEvaluation(new Evaluation(0
         ~5, new Teacher("test")
         , new Course("test") 
         "content"));
+        
+        //Evaluation e;
+        //delEvaluation(e);
+        
+        
     }
     
 }
