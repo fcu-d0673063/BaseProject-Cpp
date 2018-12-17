@@ -12,8 +12,13 @@ public class Evaluation {
     private Course course;
     private String comment;
    
+    public Evaluation(int score,Teacher teacher,Course course,String comment){
+        this.score = score;
+        this.teacher = teacher;
+        this.course = course;
+        this.comment = comment;
+    }
     
-
     
     public String getId(){
         return id;
