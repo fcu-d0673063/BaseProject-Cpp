@@ -18,9 +18,9 @@ public class MyDatabase {
     MongoCollection<Document> courses;
     MongoCollection<Document> evaluations;
 
-    public MyDatabase(String url) {
+    public MyDatabase(String host, int port) {
         try {
-            mongoClient = new MongoClient(url);
+            mongoClient = new MongoClient(host, port);
             mongoDatabase = mongoClient.getDatabase("ces");
             teachers = mongoDatabase.getCollection("teacher");
             courses = mongoDatabase.getCollection("course");
@@ -52,7 +52,7 @@ public class MyDatabase {
         Document document = new Document("name", teacher.getName())
                 .append("rate", 0.0)
                 .append("evaluations", new ArrayList<Evaluation>());
-        courses.insertOne(document);
+        teachers.insertOne(document);
         return true;
     }
 
@@ -98,9 +98,10 @@ public class MyDatabase {
     }
 
     public ArrayList<Evaluation> findCourse(String name) {
-        FindIterable<Document> interable = evaluations.find(Filters.eq("course", name));
-        MongoCursor<Document> cursor = interable.iterator();
+        FindIterable<Document> iterable = evaluations.find(Filters.eq("course", name));
+        MongoCursor<Document> cursor = iterable.iterator();
         ArrayList<Evaluation> result = new ArrayList<>();
+        
         while (cursor.hasNext()) {
             Document temp = cursor.next();
             result.add(new Evaluation((int) temp.get("rate"),
@@ -113,9 +114,10 @@ public class MyDatabase {
     }
 
     public ArrayList<Evaluation> findTeacher(String name) {
-        FindIterable<Document> interable = evaluations.find(Filters.eq("teacher", name));
-        MongoCursor<Document> cursor = interable.iterator();
+        FindIterable<Document> iterable = evaluations.find(Filters.eq("teacher", name));
+        MongoCursor<Document> cursor = iterable.iterator();
         ArrayList<Evaluation> result = new ArrayList<>();
+        
         while (cursor.hasNext()) {
             Document temp = cursor.next();
             result.add(new Evaluation((int) temp.get("rate"),
@@ -128,16 +130,17 @@ public class MyDatabase {
     }
 
     public ArrayList<Evaluation> findEvaluation(String keyword) {
-        FindIterable<Document> interable = evaluations.find();
-        MongoCursor<Document> cursor = interable.iterator();
+        FindIterable<Document> iterable = evaluations.find();
+        MongoCursor<Document> cursor = iterable.iterator();
         ArrayList<Evaluation> result = new ArrayList<>();
+        
         while (cursor.hasNext()) {
             Document temp = cursor.next();
             if (((String) temp.get("comment")).contains(keyword)) {
-                result.add(new Evaluation((int) cursor.next().get("rate"),
-                         new Teacher((String) cursor.next().get("teacher")),
-                         new Course((String) cursor.next().get("course")),
-                         (String) cursor.next().get("comment")));
+                result.add(new Evaluation((int) temp.get("rate"),
+                         new Teacher((String) temp.get("teacher")),
+                         new Course((String) temp.get("course")),
+                         (String) temp.get("comment")));
             }
         }
 

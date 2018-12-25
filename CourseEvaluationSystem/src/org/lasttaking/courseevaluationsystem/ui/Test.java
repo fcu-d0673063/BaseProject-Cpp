@@ -1,3 +1,8 @@
+package org.lasttaking.courseevaluationsystem.ui;
+
+
+import com.mongodb.MongoClient;
+import com.mongodb.client.MongoDatabase;
 import org.lasttaking.courseevaluationsystem.model.*;
 
 /**
@@ -11,7 +16,14 @@ public class Test {
      */
     public static void main(String[] args) {
 
-        ProjectUI ui = new ProjectUI();
+        MongoClient mongoClient = new MongoClient("localhost", 27017);
+        MongoDatabase db = mongoClient.getDatabase("ces");
+        db.createCollection("teacher");
+        db.createCollection("course");
+        db.createCollection("evaluation");
+
+
+        /*ProjectUI ui = new ProjectUI();
 
         Course c = ui.findCourse("");
         
@@ -29,9 +41,7 @@ public class Test {
         "content"));
         
         //Evaluation e;
-        //delEvaluation(e);
-        
-        
+        //delEvaluation(e);*/
     }
-    
+
 }
