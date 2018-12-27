@@ -269,7 +269,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="&#x5fae;&#x8edf;&#x6b63;&#x9ed1;&#x9ad4;" size="18" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="&#x8a55;&#x50f9;&#x5206;&#x6578;"/>
+        <Property name="text" type="java.lang.String" value="&#x8a55;&#x50f9;&#x5206;&#x6578;&#xff1a;5"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="jButton5">

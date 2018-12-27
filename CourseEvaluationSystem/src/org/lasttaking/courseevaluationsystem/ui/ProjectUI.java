@@ -37,7 +37,7 @@ public class ProjectUI extends javax.swing.JFrame {
     }
 
     private void perform(ArrayList<Evaluation> evas) {
-        //((DefaultTableModel) jTable1.getModel()).setRowCount(0);
+        ((DefaultTableModel) jTable1.getModel()).setRowCount(0);
 
         for (Evaluation eva : evas) {
             ((DefaultTableModel) jTable1.getModel()).addRow(
@@ -161,7 +161,7 @@ public class ProjectUI extends javax.swing.JFrame {
         });
 
         jLabel4.setFont(new java.awt.Font("微軟正黑體", 0, 18)); // NOI18N
-        jLabel4.setText("評價分數");
+        jLabel4.setText("評價分數：5");
 
         jButton5.setFont(new java.awt.Font("微軟正黑體", 0, 18)); // NOI18N
         jButton5.setText("送出評價");
